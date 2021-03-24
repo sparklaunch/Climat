@@ -8,6 +8,15 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final dynamic receivedData = ModalRoute.of(context).settings.arguments;
+    return Scaffold(
+      backgroundColor: Colors.lightBlue,
+      appBar: AppBar(
+        title: Text("Climat"),
+      ),
+      body: Container(
+        child: null,
+      ),
+    );
   }
 }
