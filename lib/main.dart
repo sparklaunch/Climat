@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import "package:climat/screens/LoadingScreen.dart";
 import "package:climat/screens/MainScreen.dart";
+import "package:climat/screens/SearchScreen.dart";
 
 void main() {
   runApp(
@@ -14,6 +15,7 @@ void main() {
       routes: {
         "/": (context) => LoadingScreen(),
         "/index": (context) => MainScreen(),
+        "/search": (context) => SearchScreen(),
       },
     ),
   );

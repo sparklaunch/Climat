@@ -8,15 +8,38 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  @override
-  Widget build(BuildContext context) {
-    final dynamic receivedData = ModalRoute.of(context).settings.arguments;
-    final int weatherCode = receivedData["weather"][0]["id"];
+  Color backgroundColor;
+  String cityName;
+  int temperature;
+  String status;
+  String image;
+  int minTemperature;
+  int maxTemperature;
+  int humidity;
+
+  void updateUI() {
+    final dynamic weatherData = ModalRoute.of(context).settings.arguments;
+    final int weatherCode = weatherData["weather"][0]["id"];
     final WeatherHelper weatherHelper = WeatherHelper(
       weatherCode: weatherCode,
     );
+    setState(() {
+      this.backgroundColor = weatherHelper.getBackgroundColor();
+      this.cityName = weatherData["name"];
+      this.temperature = weatherData["main"]["temp"].toInt();
+      this.status = weatherHelper.getWeatherStatus();
+      this.minTemperature = weatherData["main"]["temp_min"].toInt();
+      this.maxTemperature = weatherData["main"]["temp_max"].toInt();
+      this.humidity = weatherData["main"]["humidity"];
+      this.image = weatherHelper.getWeatherImage();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    this.updateUI();
     return Scaffold(
-      backgroundColor: weatherHelper.getBackgroundColor(),
+      backgroundColor: this.backgroundColor,
       appBar: AppBar(
         title: Text("Climat"),
       ),
@@ -26,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                receivedData["name"],
+                this.cityName,
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
@@ -39,14 +62,14 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "./assets/images/${weatherHelper.getWeatherImage()}",
+                    "./assets/images/${this.image}",
                     scale: 4.0,
                   ),
                   SizedBox(
                     width: 30.0,
                   ),
                   Text(
-                    "${receivedData["main"]["temp"].toInt().toString()}°C",
+                    "${this.temperature}°C",
                     style: TextStyle(
                       fontSize: 96.0,
                       color: Colors.white,
@@ -58,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                 height: 30.0,
               ),
               Text(
-                weatherHelper.getWeatherStatus().toUpperCase(),
+                this.status.toUpperCase(),
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
@@ -68,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                 height: 10.0,
               ),
               Text(
-                "MIN / MAX : ${receivedData["main"]["temp_min"].toInt().toString()} / ${receivedData["main"]["temp_max"].toInt().toString()}",
+                "MIN / MAX : ${this.minTemperature.toString()} / ${this.maxTemperature.toString()}",
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
@@ -78,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                 height: 10.0,
               ),
               Text(
-                "HUMIDITY : ${receivedData["main"]["humidity"]}%",
+                "HUMIDITY : ${this.humidity}%",
                 style: TextStyle(
                   fontSize: 24.0,
                   color: Colors.white,
@@ -88,7 +111,9 @@ class _MainScreenState extends State<MainScreen> {
                 height: 30.0,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, "/search");
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: 8.0,
