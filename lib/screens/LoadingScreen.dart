@@ -18,11 +18,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
         uri:
             "$endPoint&lat=${coordinates["latitude"]}&lon=${coordinates["longitude"]}");
     final dynamic data = await networkHelper.getData();
-    Navigator.pushNamed(context, "/index", arguments: data);
+    return await Navigator.pushNamed(context, "/index", arguments: data);
   }
 
   @override
   void initState() {
+    super.initState();
     this.getWeatherData();
   }
 

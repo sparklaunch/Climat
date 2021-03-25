@@ -4,7 +4,7 @@ class WeatherHelper {
   String _status = "sunny";
   Color _backgroundColor = Colors.lightBlue;
   String _image = "sunny.png";
-  WeatherHelper({@required int weatherCode = 800}) {
+  WeatherHelper({int weatherCode = 800}) {
     if (weatherCode > 800) {
       this._status = "cloudy";
       this._backgroundColor = Colors.blueGrey;

@@ -74,7 +74,9 @@ class _SearchScreenState extends State<SearchScreen> {
                     vertical: 8.0,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context, this.userInput);
+                },
                 child: Text(
                   "Submit",
                   style: TextStyle(
