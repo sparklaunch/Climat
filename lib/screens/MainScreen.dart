@@ -67,14 +67,9 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               Text(
                 this.cityName ?? "No City Name",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                ),
+                style: kCityNameTextStyle,
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              kGapBetweenCityNameAndTemperature,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -82,51 +77,29 @@ class _MainScreenState extends State<MainScreen> {
                     "./assets/images/${this.image ?? "sunny.png"}",
                     scale: 4.0,
                   ),
-                  SizedBox(
-                    width: 30.0,
-                  ),
+                  kGapBetweenWeatherIconAndTemperature,
                   Text(
                     "${this.temperature}°C",
-                    style: TextStyle(
-                      fontSize: 96.0,
-                      color: Colors.white,
-                    ),
+                    style: kTemperatureTextStyle,
                   ),
                 ],
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              kGapBetweenTemperatureAndStatus,
               Text(
                 this.status == null ? "No Status" : this.status.toUpperCase(),
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                ),
+                style: kStatusTextStyle,
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              kGapBetweenStatusAndMinMaxTemperature,
               Text(
                 "MIN / MAX : ${this.minTemperature.toString()} / ${this.maxTemperature.toString()}",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                ),
+                style: kMinMaxTemperatureTextStyle,
               ),
-              SizedBox(
-                height: 10.0,
-              ),
+              kGapBetweenMinMaxTemperatureAndHumidity,
               Text(
                 "HUMIDITY : ${this.humidity}%",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.white,
-                ),
+                style: kHumidityTextStyle,
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              kGapBetweenHumidityAndButton,
               ElevatedButton(
                 onPressed: () async {
                   dynamic userInput =
@@ -141,17 +114,10 @@ class _MainScreenState extends State<MainScreen> {
                     this.updateUI();
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 16.0,
-                  ),
-                ),
+                style: kBottomButtonStyle,
                 child: Text(
                   "Search by city name",
-                  style: TextStyle(
-                    fontSize: 20.0,
-                  ),
+                  style: kButtonTextStyle,
                 ),
               ),
             ],

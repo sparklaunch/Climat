@@ -1,3 +1,4 @@
+import 'package:climat/utilities/constants.dart';
 import "package:flutter/material.dart";
 
 class SearchScreen extends StatefulWidget {
@@ -21,41 +22,14 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               Text(
                 "Enter a city name",
-                style: TextStyle(
-                  fontSize: 32.0,
-                  color: Colors.white,
-                ),
+                style: kCityTextFieldLabelTextStyle,
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              kGapBetweenLabelAndTextField,
               Container(
-                width: 200.0,
+                width: kTextFieldWidth,
                 child: TextField(
-                  decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black38,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                    ),
-                    hintText: "Enter here",
-                    hintStyle: TextStyle(
-                      color: Colors.blueGrey,
-                    ),
-                    isDense: true,
-                    contentPadding: EdgeInsets.only(
-                      bottom: 5.0,
-                    ),
-                  ),
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    color: Colors.white,
-                  ),
+                  decoration: kSearchButtonInputDecoration,
+                  style: kSearchButtonTextStyle,
                   onChanged: (event) {
                     setState(() {
                       this.userInput = event;
@@ -63,25 +37,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   },
                 ),
               ),
-              SizedBox(
-                height: 30.0,
-              ),
+              kGapBetweenTextFieldAndButton,
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.lightBlue,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.0,
-                    vertical: 8.0,
-                  ),
-                ),
+                style: kSubmitButtonButtonStyle,
                 onPressed: () {
                   Navigator.pop(context, this.userInput);
                 },
                 child: Text(
                   "Submit",
-                  style: TextStyle(
-                    fontSize: 24.0,
-                  ),
+                  style: kSubmitButtonTextStyle,
                 ),
               ),
             ],
